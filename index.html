@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Card Checkout</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="tailwind.config.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="animated-bg min-h-screen flex items-center justify-center p-4">
+    <div class="bg-pattern"></div>
+    <div class="floating-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+    <main class="w-full max-w-4xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden">
+        <div class="flex flex-col md:flex-row">
+            <!-- Left Side - Card Preview -->
+            <div class="w-full md:w-1/2 bg-gradient-to-br from-violet-600 to-indigo-800 p-8">
+                <div class="relative h-56 w-96 mx-auto perspective">
+                    <div id="card" class="relative w-full h-full transition-all duration-700 preserve-3d hover:rotate-y-180">
+                        <!-- Front of Card -->
+                        <div class="absolute w-full h-full bg-gradient-to-br from-violet-400 to-indigo-600 rounded-2xl shadow-xl p-6 backface-hidden">
+                            <div class="flex justify-between items-start">
+                                <div class="w-12 h-12 bg-yellow-200/80 rounded-lg grid place-items-center">
+                                    <div class="w-8 h-8 bg-yellow-400/80 rounded-md"></div>
+                                </div>
+                                <i id="cardLogo" class="fab text-white text-6xl opacity-0 transition-all duration-300 w-32 text-right"></i>
+                            </div>
+                            <div class="mt-8">
+                                <h2 id="cardNumber" class="text-2xl tracking-wider embossed">•••• •••• •••• ••••</h2>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-300 text-xs">Card Holder</p>
+                                    <p id="cardHolder" class="embossed text-lg">JOHN DOE</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300 text-xs">Expires</p>
+                                    <p id="cardExpiry" class="embossed text-lg">MM/YY</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back of Card -->
+                        <div class="absolute w-full h-full bg-gradient-to-br from-violet-400 to-indigo-600 rounded-2xl shadow-xl backface-hidden rotate-y-180">
+                            <div class="w-full h-12 bg-gray-800 mt-6"></div>
+                            <div class="px-6 mt-6">
+                                <div class="flex justify-end items-center">
+                                    <div class="bg-white rounded h-8 w-full">
+                                        <p id="cardCVC" class="text-right pr-4 pt-1 font-mono">•••</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side - Form -->
+            <div class="w-full md:w-1/2 p-8">
+                <h1 class="text-2xl font-bold text-gray-800 mb-8">Payment Details</h1>
+                <form id="paymentForm" class="space-y-6">
+                    <div class="space-y-1">
+                        <label for="cardholderName" class="block text-sm font-medium text-gray-700">Cardholder Name</label>
+                        <input type="text" id="cardholderName" 
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                            placeholder="John Doe">
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number</label>
+                        <div class="relative">
+                            <input type="text" id="cardNumberInput" maxlength="19" 
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                placeholder="1234 5678 9012 3456">
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-2">
+                                <i class="fab fa-cc-visa text-gray-400 card-type-icon"></i>
+                                <i class="fab fa-cc-mastercard text-gray-400 card-type-icon"></i>
+                                <i class="fab fa-cc-amex text-gray-400 card-type-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label for="expiryDate" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                            <input type="text" id="expiryDate" maxlength="5" 
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                placeholder="MM/YY">
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                            <input type="text" id="cvc" maxlength="3" 
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                                placeholder="123">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" 
+                        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+                        Pay Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
